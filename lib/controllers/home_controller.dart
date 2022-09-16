@@ -4,6 +4,7 @@
 import 'package:get/get.dart';
 import 'package:recipe_app/models/category.dart';
 import 'package:recipe_app/models/ingredient.dart';
+import 'package:recipe_app/models/menu.dart';
 import 'package:recipe_app/models/product.dart';
 import 'package:recipe_app/models/user.dart';
 
@@ -13,16 +14,24 @@ class HomeController extends GetxController{
    var products = <Product>[].obs;
    var users = <User>[].obs;
    var categories = <Category>[].obs;
+   var menus = <Menu>[].obs;
+   var isLoading = false.obs;
+   var menu_selected = 1.obs;
+   var page_selected = 0.obs;
 
 
+   changePage(int index){
+     page_selected.value = index;
+   }
    fetchCategories(){
+     isLoading(true);
     categories.value = [
      Category(title: 'Oats', image: 'assets/images/oats.png', color: Colors.grey),
      Category(title: 'Cereals', image: 'assets/images/cereal.png', color: Colors.pink),
      Category(title: 'Fruits', image: 'assets/images/banana.png', color: Colors.blue),
      Category(title: 'Vegetable', image: 'assets/images/corn.png', color: Colors.orange),
      Category(
-         title: 'Bread', image: 'assets/bread.png', color: Colors.brown.shade400),
+         title: 'Bread', image: 'assets/images/bread.png', color: Colors.brown.shade400),
     ];
    }
    fetchUsers(){
@@ -31,8 +40,21 @@ class HomeController extends GetxController{
      User(image: 'assets/images/girls/girl2.jpg', name: 'Annie Smith'),
      User(image: 'assets/images/girls/girl3.jpg', name: 'Kareena Ameera'),
     ];
+    fetchProducts(users[0]);
    }
 
+   fetchMenu(){
+
+     menus.value = [
+       Menu(title: 'Breakfast', id: 1),
+       Menu(title: 'Lunch', id: 2),
+       Menu(title: 'Dinner', id: 3),
+       Menu(title: 'Snack', id: 4),
+       Menu(title: 'Cheat Menu', id: 5),
+
+
+     ];
+   }
 
 
 
@@ -94,6 +116,9 @@ class HomeController extends GetxController{
          protein: 15,
          carb: 15),
     ];
+    Future.delayed(Duration(microseconds: 1000),(){
+      isLoading(false);
+    });
    }
    fetchIngredients(){
     ingredients.value =  [

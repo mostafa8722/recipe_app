@@ -17,19 +17,43 @@ class HeaderComponent extends StatelessWidget{
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
              children: [
-               Text(title),
-               Text(subTitle),
+
+               Text(title,style: TextStyle(color: Colors.black.withOpacity(0.7),fontSize: 16,fontWeight: FontWeight.bold),),
+               SizedBox(height: 5,),
+               Text(subTitle,style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 14),),
              ],
         ),
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(img),
-              fit: BoxFit.cover
-            )
-          ),
-        )
+       Stack(
+         children: [
+           Container(
+             height: 50,
+             width: 50,
+             decoration: BoxDecoration(
+               shape: BoxShape.circle,
+                 image: DecorationImage(
+                     image: AssetImage(img),
+                     fit: BoxFit.cover
+                 )
+             ),
+           ),
+           Positioned(
+               top: 5,
+               right: 5,
+               child:
+           Container(
+             height: 8,
+             width: 8,
+             decoration: BoxDecoration(
+
+               color: Colors.green,
+               shape: BoxShape.circle
+             ),
+           )
+           )
+         ],
+       )
       ],
     );
   }
